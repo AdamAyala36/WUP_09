@@ -74,16 +74,34 @@ This shows the Height and Width variables to be the best model. Which also shows
 ```{r}
 which.max(summary.out$adjr2)
 ```
-This shows that the model 2 is the best model to express the data when looking at the Adjusted R-squared value.
+This shows that the model including H and W is the best model to express the data when looking at the Adjusted R-squared value.
 
 ### Best Two regressor model
 ```{r}
 summary.out$which[2,]
 ```
 
-The best model of the perch fish is model 2, this data summary shows model 2 which has the highest Adjusted r-squared value having two variables meaning model 2 is the best two regression model.
+The best model of the perch fish is the model including H and W, this data summary shows that same model that includes H and W which has the highest Adjusted r-squared value having two variables meaning that this model is the best two regression model.
 
 ## Pike
+
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Pike,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
+
+The best model appears to be the model including all L1, L2, L3, H, and W. While the best two regressor model appears to be the model including L1 and L3.
 
 ### Best Models
 
