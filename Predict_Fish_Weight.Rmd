@@ -70,8 +70,11 @@ subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
 This shows the Height and Weight variables to be the best model. Which also shows to be the best two variable model but can be proven using code.
 
 ### Best Models
-Best model overrall
 
+```{r}
+which.max(summary.out$adjr2)
+```
+This shows that the model 2 is the best model to express the data when looking at the Adujusted R-squared value.
 
 ### Best Two regressor model
 Best two variable model
